@@ -2,19 +2,19 @@ package org.java.Grooking.SerializeInheritance;
 
 import java.io.*;
 
-public class TestSeralization {
+public class TestSerialization1 {
 
-    // Example when Parent class is extending Serializable interface
-    public static void main(String[] args){
-        Child child = new Child(10,50);
-        System.out.println(" x: " + child.x);
-        System.out.println("y:" + child.y);
+    // Example when Child class implents Serializable and Parent class does not implement Serializable
+    // No Arg constructor pattern
+    public static void main(String[] args) {
+        Child1 child1 = new Child1(20,40);
+        System.out.println(" x: " + child1.x);
+        System.out.println(" x: " + child1.y);
         String file = "/Users/poorvimaheshwari/Downloads/bytestream.txt";
-        serializeObject(file,child);
+        serializeObject(file,child1);
         deserializeObject(file);
     }
-
-    private static void serializeObject(String file, Child child){
+    private static void serializeObject(String file, Child1 child){
         try {
             FileOutputStream fos = new FileOutputStream(file);
             ObjectOutputStream oos = new ObjectOutputStream(fos);
@@ -30,14 +30,16 @@ public class TestSeralization {
         try{
             FileInputStream fis = new FileInputStream(file);
             ObjectInputStream ois = new ObjectInputStream(fis);
-            Child child1 = (Child) ois.readObject();
+            Child1 child2 = (Child1) ois.readObject();
             fis.close();
             ois.close();
             System.out.println("The object deserialized successfully");
-            System.out.println(" x: " + child1.x);
-            System.out.println("y:" + child1.y);
+            System.out.println(" x: " + child2.x);
+            System.out.println("y:" + child2.y);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
     }
+
+
 }
